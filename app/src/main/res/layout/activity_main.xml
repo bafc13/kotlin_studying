@@ -22,7 +22,7 @@
     <EditText
         android:id="@+id/initial_list"
         android:layout_width="265dp"
-        android:layout_height="43dp"
+        android:layout_height="48dp"
         android:hint="@string/hint"
         android:inputType="text"
         android:textSize="14sp"
@@ -37,7 +37,7 @@
     <android.widget.Button
         android:id="@+id/normalize_button"
         android:layout_width="140dp"
-        android:layout_height="30dp"
+        android:layout_height="48dp"
         android:text="@string/button_text"
         android:textColor="@color/black"
         android:textAllCaps="false"
@@ -61,7 +61,7 @@
 
     <TextView
         android:id="@+id/normalized_list"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:fontFamily="@font/manrope_light"
         android:textSize="16sp"
