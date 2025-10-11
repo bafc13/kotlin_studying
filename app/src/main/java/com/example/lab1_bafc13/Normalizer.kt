@@ -2,7 +2,6 @@ package com.example.lab1_bafc13
 
 import kotlin.math.floor
 
-class Normalizer {
     val listToNormalize = mutableListOf<Int>()
     val normalizedList = mutableListOf<Double>()
     fun fillList(): MutableList<Int> {
@@ -24,4 +23,3 @@ class Normalizer {
         normalizedList.clear()
         normalizedList.addAll( data.map { floor(( it.toDouble() / maxVal) * 1000) / 1000 } as MutableList<Double> )
     }
-}

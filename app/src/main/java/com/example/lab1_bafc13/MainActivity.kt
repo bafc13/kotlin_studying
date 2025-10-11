@@ -15,16 +15,15 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
-        val normalizer = Normalizer()
-        val initialList = normalizer.fillList()
-        val initialString = normalizer.makeString(initialList)
+        val initialList = fillList()
+        val initialString = makeString(initialList)
         val textView = findViewById<EditText>(R.id.initial_list)
         textView.setText(initialString)
 
         val button = findViewById<Button>(R.id.normalize_button)
         button.setOnClickListener {
-            val normalizedList = normalizer.normalizeByString(textView.text.toString())
-            val normalizedString = normalizer.makeString(normalizedList)
+            val normalizedList = normalizeByString(textView.text.toString())
+            val normalizedString = makeString(normalizedList)
             val textView = findViewById<TextView>(R.id.normalized_list)
             textView.text = normalizedString
         }
