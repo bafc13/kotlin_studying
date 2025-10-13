@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Lab1_bafc13</string>
+    <string name="initial_data_string">Исходный список:</string>
+    <string name="hint">Введите список чисел от 0 до 125</string>
+    <string name="normalized_data_string">Нормализованный список:</string>
+    <string name="button_text">Нормализовать</string>
+</resources>
