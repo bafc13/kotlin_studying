@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="navBarWhiteThemeColor">#D4D9FF</color>
+    <color name="activityBackgroundColor">#B5CEFF</color>
+    <color name="textBackgroundColor">#EDEEF1</color>
 </resources>

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Lab1_bafc13</string>
+    <string-array name="regions" >
+        <item>Калужская область</item>
+        <item>Московская область</item>
+    </string-array>
 </resources>

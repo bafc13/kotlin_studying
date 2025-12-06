@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/activityBackgroundColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/profile_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_user"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:layout_marginTop="23dp"
+        android:fontFamily="@font/roboto_bold"
+        app:layout_constraintTop_toBottomOf="@id/profile_picture"
+        app:layout_constraintStart_toStartOf="@id/profile_picture"
+        app:layout_constraintEnd_toEndOf="@id/profile_picture"
+        android:textSize="25dp"
+        tools:text="BaFC13" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutUuid"
+        android:layout_width="match_parent"
+        android:layout_height="107dp"
+        android:layout_marginTop="96dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/shape_uuid_background"
+        app:layout_constraintTop_toBottomOf="@id/profile_picture"
+        app:layout_constraintStart_toStartOf="@id/profile_picture"
+        app:layout_constraintEnd_toEndOf="@id/profile_picture">
+
+        <TextView
+            android:id="@+id/uuid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="14dp"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="22dp"
+            tools:text="Пользовательский идентификатор:9a346f11-c143-4a97-b2e7-8f79c4a8a2de" />
+
+    </LinearLayout>
+
+    <Spinner
+        android:id="@+id/states_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginTop="23dp"
+        android:textColor="@color/black"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
+        android:background="@drawable/shape_spinner"
+        android:padding="12dp"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutUuid"
+        android:dropDownWidth="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        android:background="@color/navBarWhiteThemeColor"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_map" />
+
+        <ImageButton
+            android:id="@+id/imageButton2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_favorite" />
+
+        <ImageButton
+            android:id="@+id/imageButton3"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:backgroundTint="@android:color/transparent"
+            android:src="@drawable/ic_profile_chosen" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
