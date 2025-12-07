@@ -52,6 +52,17 @@ android {
 }
 
 dependencies {
+    implementation("androidx.recyclerview:recyclerview:1.4.0")
+    implementation("com.squareup.retrofit2:retrofit:3.0.0")
+    implementation("com.squareup.retrofit2:converter-gson:3.0.0")
+
+    implementation("io.coil-kt:coil:2.7.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.10.0")
+
     implementation("com.google.android.material:material:1.13.0")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

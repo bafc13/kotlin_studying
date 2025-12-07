@@ -6,24 +6,53 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.lab1_bafc13.adapters.FavoriteRadarAdapter
 import com.example.lab1_bafc13.databinding.ActivityFavoritesBinding
+import com.example.lab1_bafc13.viewmodels.FavoriteRadarViewModel
 
 class ActivityFavorites : AppCompatActivity(){
 
+    private var _viewModel: FavoriteRadarViewModel? = null
+    private var _adapter: FavoriteRadarAdapter? = null
     private var _binding : ActivityFavoritesBinding? = null
     private val binding
         get() = _binding ?: throw IllegalStateException ("ActivityMapBinding is null")
+
+    private val viewModel
+        get() = _viewModel ?: throw IllegalStateException("ViewModel for FavoriteRadars must not be null")
+    private val adapter
+        get() = _adapter ?: throw IllegalStateException("Adapter for FavoriteRadars must not be null")
     private lateinit var gestureDetector : GestureDetector
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityFavoritesBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
 
+        enableEdgeToEdge()
         setContentView(binding.root)
+
         initializeGestureDetector()
         setButtonListeners()
+
+        _viewModel = ViewModelProvider(this).get(FavoriteRadarViewModel::class.java)
+        _adapter = FavoriteRadarAdapter {}
+        binding.recyclerView.apply {
+            adapter = this@ActivityFavorites.adapter
+            layoutManager = GridLayoutManager(this@ActivityFavorites, 1)
+        }
+
+        viewModel.radars.observe(this) { radars ->
+            adapter.updateRadars(radars)
+        }
+        viewModel.loadRadars()
+        viewModel.error.observe(this) { errorMessage ->
+            if (!errorMessage.isNullOrEmpty()) {
+                println("Ошибка: $errorMessage")
+            }
+        }
     }
 
     fun setButtonListeners(){
