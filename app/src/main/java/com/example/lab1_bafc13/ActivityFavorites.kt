@@ -1,6 +1,8 @@
 package com.example.lab1_bafc13
 
+import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.GestureDetector
 import android.view.MotionEvent
@@ -97,7 +99,16 @@ class ActivityFavorites : AppCompatActivity(){
 
     private fun onSwipeLeft() {
         startActivity(Intent(this, ActivityProfile::class.java))
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(
+                Activity.OVERRIDE_TRANSITION_OPEN,
+                R.anim.slide_in_right,
+                R.anim.slide_out_left
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
     }
 
     private fun onSwipeRight() {
@@ -107,7 +118,16 @@ class ActivityFavorites : AppCompatActivity(){
 //        intent.putExtra("x_coord", x_coord)
 //        intent.putExtra("y_coord", y_coord)
         startActivity(intent)
-        overridePendingTransition(R.anim.slide_out_left, android.R.anim.slide_out_right)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(
+                Activity.OVERRIDE_TRANSITION_OPEN,
+                R.anim.slide_out_left,
+                android.R.anim.slide_out_right
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.slide_out_left,android.R.anim.slide_out_right)
+        }
     }
 
 }
