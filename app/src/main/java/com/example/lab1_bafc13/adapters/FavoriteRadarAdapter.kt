@@ -8,7 +8,8 @@ import com.example.lab1_bafc13.models.FavoriteRadar
 
 class FavoriteRadarAdapter(
     private val radars: MutableList<FavoriteRadar> = mutableListOf(),
-    private val onProductClick: (FavoriteRadar) -> Unit = {}
+    private val onRadarClick: (FavoriteRadar) -> Unit = {},
+    private val onDeleteButtonClick: (FavoriteRadar) -> Unit = {}
 ) : RecyclerView.Adapter<FavoriteRadarAdapter.FavoriteRadarViewHolder>() {
 
     inner class FavoriteRadarViewHolder(
@@ -20,7 +21,10 @@ class FavoriteRadarAdapter(
             binding.yCoord.text = radar.gps_y.toString()
 
             binding.root.setOnClickListener {
-                onProductClick(radar)
+                onRadarClick(radar)
+            }
+            binding.deleteButton.setOnClickListener {
+                onDeleteButtonClick(radar)
             }
         }
     }

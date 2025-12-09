@@ -2,7 +2,7 @@ package com.example.lab1_bafc13.models
 
 
 data class FavoriteRadar (
-    val uuid: String,
+    val user_uuid: String,
     val camera_id: String,
     val region_code: String,
     val src_camera: String,

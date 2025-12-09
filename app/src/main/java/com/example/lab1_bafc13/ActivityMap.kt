@@ -20,10 +20,16 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.lab1_bafc13.databinding.ActivityMapBinding
+import com.example.lab1_bafc13.models.Radar
 import com.example.lab1_bafc13.models.User
 import com.example.lab1_bafc13.viewmodels.MapViewModel
+import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
+import com.yandex.mapkit.geometry.Point
+import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.map.PlacemarkMapObject
 import com.yandex.mapkit.mapview.MapView
+import com.yandex.runtime.image.ImageProvider
 import kotlinx.coroutines.launch
 import java.util.UUID
 
@@ -41,23 +47,23 @@ class ActivityMap : AppCompatActivity() {
     private lateinit var loginLayout: LinearLayout
     private lateinit var nameInput: EditText
     private lateinit var submitButton: Button
+    private val placemarks = mutableListOf<PlacemarkMapObject>()
+
+    var coord_y : Double = 0.0
+    var coord_x : Double = 0.0
 
 
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { permissions ->
-        val allGranted = permissions.values.all { it }
-        if (allGranted) {
-            accessSharedFd()
-        } else {
-            Toast.makeText(this, "Разрешения отклонены", Toast.LENGTH_SHORT).show()
-        }
+
+    companion object {
+        private var isApiKeySet = false
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        MapKitFactory.setApiKey(BuildConfig.MAPKIT_API_KEY)
+        if (!isApiKeySet) {
+            MapKitFactory.setApiKey(BuildConfig.MAPKIT_API_KEY)
+            isApiKeySet = true
+        }
 
         _binding = ActivityMapBinding.inflate(layoutInflater)
         _mapViewModel = ViewModelProvider(this).get(MapViewModel::class.java)
@@ -75,7 +81,21 @@ class ActivityMap : AppCompatActivity() {
         mapView = binding.mapview
         binding.mapview.visibility = View.GONE
 
+        coord_y = intent.getDoubleExtra("EXTRA_COORD_Y", 0.0)
+        coord_x = intent.getDoubleExtra("EXTRA_COORD_X", 0.0)
+
         checkAndRequestPermissions()
+    }
+
+    private val requestPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        val allGranted = permissions.values.all { it }
+        if (allGranted) {
+            accessSharedFd()
+        } else {
+            Toast.makeText(this, "Разрешения отклонены", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun checkAndRequestPermissions() {
@@ -113,8 +133,76 @@ class ActivityMap : AppCompatActivity() {
     }
 
     private fun initMap() {
+        if(!openFavoritePoint()) {
+            val state = mapViewModel.getState()
+            if(state == "Калужская область" || state == null || state == "") {
+                mapView.mapWindow.map.move( //Калужская область
+                    CameraPosition(
+                        Point(54.517, 36.261),
+                        9.0f,
+                        0.0f,
+                        0.0f
+                    )
+                )
+            } else {
+                mapView.mapWindow.map.move( //Москва
+                    CameraPosition(
+                        Point(55.75, 37.62),
+                        9.0f,
+                        0.0f,
+                        0.0f
+                    )
+                )
+            }
+        }
+
+        mapViewModel.radars.observe(this) { radars ->
+            addRadarMarkers(radars)
+        }
+        mapViewModel.loadRadars()
+
         binding.mapview.visibility = View.VISIBLE
     }
+
+    fun openFavoritePoint() : Boolean {
+        if (coord_y != 0.0 && coord_x != 0.0) {
+            mapView.mapWindow.map.move(
+                CameraPosition(
+                    Point(coord_y, coord_x),
+                    18.0f,
+                    0.0f,
+                    0.0f
+                ),
+                Animation(Animation.Type.SMOOTH, 1.5f),
+                null
+            )
+            return true;
+        }
+        return false;
+    }
+
+    private fun addRadarMarkers(radars: List<Radar>) {
+        val mapObjects = mapView.mapWindow.map.mapObjects
+        val icon = ImageProvider.fromResource(this, R.drawable.ic_action_name)
+        placemarks.forEach { placemark ->
+            mapObjects.remove(placemark)  }
+        placemarks.clear()
+
+        radars.forEach { radar ->
+            val point = Point(radar.gps_y, radar.gps_x)
+            val placemark = mapObjects.addPlacemark().apply {
+                geometry = point
+                setIcon(icon)
+                direction = 0.0f
+                addTapListener { mapObject, point ->
+                    mapViewModel.saveToFavorites(radar)
+                    true
+                }
+            }
+            placemarks.add(placemark)
+        }
+    }
+
     private fun initViews() {
         loginLayout = binding.loginLayout
         nameInput = binding.nameInput
@@ -126,6 +214,7 @@ class ActivityMap : AppCompatActivity() {
 
                 createNewUser(userName)
                 loginLayout.visibility = View.GONE
+
                 initMap()
             } else {
                 Toast.makeText(this, "Введите имя", Toast.LENGTH_SHORT).show()
@@ -155,6 +244,7 @@ class ActivityMap : AppCompatActivity() {
                 val savedName = mapViewModel.getUserName()
                 if (savedName != null) {
                     loginLayout.visibility = View.GONE
+
                     initMap()
                 } else {
                     showLoginForm()

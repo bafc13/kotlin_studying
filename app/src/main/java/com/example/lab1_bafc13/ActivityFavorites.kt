@@ -40,7 +40,18 @@ class ActivityFavorites : AppCompatActivity(){
         setButtonListeners()
 
         _viewModel = ViewModelProvider(this).get(FavoriteRadarViewModel::class.java)
-        _adapter = FavoriteRadarAdapter {}
+        viewModel.initContext(this)
+        _adapter = FavoriteRadarAdapter (radars = mutableListOf(),
+            onRadarClick = { radar ->
+                val intent = Intent(this@ActivityFavorites, ActivityMap::class.java)
+                intent.putExtra("EXTRA_COORD_Y", radar.gps_y)
+                intent.putExtra("EXTRA_COORD_X", radar.gps_x)
+                startActivity(intent)
+            },
+            onDeleteButtonClick = { radar ->
+                viewModel.deleteRadar(radar)
+            })
+
         binding.recyclerView.apply {
             adapter = this@ActivityFavorites.adapter
             layoutManager = GridLayoutManager(this@ActivityFavorites, 1)
@@ -113,10 +124,6 @@ class ActivityFavorites : AppCompatActivity(){
 
     private fun onSwipeRight() {
         val intent = Intent(this, ActivityMap::class.java)
-//        val x_coord : Double = 2.2
-//        val y_coord : Double = 3.3
-//        intent.putExtra("x_coord", x_coord)
-//        intent.putExtra("y_coord", y_coord)
         startActivity(intent)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             overrideActivityTransition(
