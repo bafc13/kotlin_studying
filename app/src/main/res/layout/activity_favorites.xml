@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/activityBackgroundColor"
+    android:background="?attr/activityBackgroundColor"
     android:layout_height="match_parent"
     tools:context=".ActivityFavorites">
 
@@ -22,7 +22,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="73dp"
-        android:background="@color/navBarWhiteThemeColor"
+        android:background="?attr/activityNavBarColor"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +36,7 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/ic_map" />
+            android:src="?attr/ic_map" />
 
         <ImageButton
             android:id="@+id/imageButton2"
@@ -46,7 +46,7 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/ic_favorite_chosen" />
+            android:src="?attr/ic_favorite_chosen" />
 
         <ImageButton
             android:id="@+id/imageButton3"
@@ -56,7 +56,7 @@
             android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
-            android:src="@drawable/ic_profile" />
+            android:src="?attr/ic_profile" />
 
     </LinearLayout>
 

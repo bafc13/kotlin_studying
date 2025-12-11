@@ -1,8 +1,18 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Lab1_bafc13" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="activityBackgroundColor">@color/activityBackgroundColor</item>
+        <item name="activityNavBarColor">@color/navBarColor</item>
+        <item name="nameBackgroundColor">@android:color/transparent</item>
+        <item name="ic_map">@drawable/ic_map</item>
+        <item name="ic_map_chosen">@drawable/ic_map_chosen</item>
+        <item name="ic_favorite">@drawable/ic_favorite</item>
+        <item name="ic_favorite_chosen">@drawable/ic_favorite_chosen</item>
+        <item name="ic_profile">@drawable/ic_profile</item>
+        <item name="ic_profile_chosen">@drawable/ic_profile_chosen</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">22dp</item>
     </style>
 
     <style name="Theme.Lab1_bafc13" parent="Base.Theme.Lab1_bafc13" />
