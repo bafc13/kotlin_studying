@@ -93,8 +93,6 @@ class ActivityMap : AppCompatActivity() {
         val allGranted = permissions.values.all { it }
         if (allGranted) {
             accessSharedFd()
-        } else {
-            Toast.makeText(this, "Разрешения отклонены", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -129,7 +127,6 @@ class ActivityMap : AppCompatActivity() {
 
     private fun accessSharedFd() {
         checkUserOrRequestLogin()
-        Toast.makeText(this, "Доступ к sharedFd разрешен", Toast.LENGTH_SHORT).show()
     }
 
     private fun initMap() {
@@ -216,8 +213,6 @@ class ActivityMap : AppCompatActivity() {
                 loginLayout.visibility = View.GONE
 
                 initMap()
-            } else {
-                Toast.makeText(this, "Введите имя", Toast.LENGTH_SHORT).show()
             }
         }
     }

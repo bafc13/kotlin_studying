@@ -67,8 +67,6 @@ class ActivityProfile : AppCompatActivity() {
             statesSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                     val selectedText = parent?.getItemAtPosition(position).toString()
-                    Toast.makeText(this@ActivityProfile, "Выбран: $selectedText", Toast.LENGTH_SHORT).show()
-
                     userViewModel.setState(selectedText)
                 }
 

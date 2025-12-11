@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="activityBackgroundColor" format="color | reference" />
+    <attr name="activityNavBarColor" format="color | reference" />
+    <attr name="nameBackgroundColor" format="color | reference" />
+    <attr name="ic_map" format="reference" />
+    <attr name="ic_map_chosen" format="reference" />
+    <attr name="ic_favorite" format="reference" />
+    <attr name="ic_favorite_chosen" format="reference" />
+    <attr name="ic_profile" format="reference" />
+    <attr name="ic_profile_chosen" format="reference" />
+</resources>
