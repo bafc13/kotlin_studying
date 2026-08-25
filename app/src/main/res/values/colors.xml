@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="navBarColor">#D4D9FF</color>
+    <color name="navBarColorNight">#000000</color>
+    <color name="activityBackgroundColor">#B5CEFF</color>
+    <color name="textBackgroundColor">#EDEEF1</color>
+    <color name="activityBackgroundColorNight">#1C2E50</color>
+</resources>
